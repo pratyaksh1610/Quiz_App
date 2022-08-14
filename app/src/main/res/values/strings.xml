@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">QuizApp</string>
+    <string name="title_activity_questions">QuestionsActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="quiz_app_login_screen_text">Quiz App</string>
+    <string name="welcome_login_screen_text">Welcome</string>
+    <string name="please_enter_your_name_login_screen_text">Please enter your name.</string>
+    <string name="name_login_screen_text">Name</string>
+</resources>

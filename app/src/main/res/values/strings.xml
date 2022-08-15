@@ -12,5 +12,4 @@
     <string name="quiz_app_login_screen_text">Quiz App</string>
     <string name="welcome_login_screen_text">Welcome</string>
     <string name="please_enter_your_name_login_screen_text">Please enter your name.</string>
-    <string name="name_login_screen_text">Name</string>
 </resources>

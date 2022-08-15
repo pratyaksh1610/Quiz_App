@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
-import androidx.appcompat.app.AppCompatActivity
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_questions2.*
+
 
 class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -17,10 +19,10 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
     private var mCurrentQuestionIndex: Int = 1
     private lateinit var mQuestionList: ArrayList<Questions>
     private lateinit var mUsername: String
+    private lateinit var category: String
     private var mCorrectAnswers: Int = 0
 
 
-    private lateinit var mImage: ImageView
     private lateinit var mQuestion: TextView
     private lateinit var mProgressbar: ProgressBar
     private lateinit var mRating: TextView
@@ -28,14 +30,17 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mOption2: TextView
     private lateinit var mOption3: TextView
     private lateinit var mOption4: TextView
-    private lateinit var mSubmitButton: Button
+    private lateinit var mSubmitButton: TextView
+
+    //music effects
+    private lateinit var right: MediaPlayer
+    private lateinit var wrong: MediaPlayer
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questions2)
 
-        mImage = image_flag
         mQuestion = tvQuestion
         mProgressbar = progressBar
         mRating = rating
@@ -46,6 +51,7 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
         mSubmitButton = submitButton
 
         mUsername = intent.getStringExtra("user").toString()
+        category = intent.getStringExtra("category").toString()
         mQuestionList = GetAllQuestions().fetchData()
 
         setQuestion()
@@ -55,6 +61,10 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
         mOption3.setOnClickListener(this)
         mOption4.setOnClickListener(this)
         mSubmitButton.setOnClickListener(this)
+
+        //music effects on wrong and right answers
+        right = MediaPlayer.create(this, R.raw.right)
+        wrong = MediaPlayer.create(this, R.raw.w)
 
     }
 
@@ -66,10 +76,9 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
         val currentQuestion = mQuestionList[mCurrentQuestionIndex - 1]
 
         if (mCurrentQuestionIndex <= mQuestionList.size) {
-            mSubmitButton.text = "Submit"
+            mSubmitButton.text = "SUBMIT"
         }
 
-        mImage.setImageResource(currentQuestion.image)
         mProgressbar.progress = mCurrentQuestionIndex
         mRating.text = "${mCurrentQuestionIndex}/${mQuestionList.size}"
         mQuestion.text = currentQuestion.question
@@ -85,11 +94,14 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
         allOptions.add(mOption2)
         allOptions.add(mOption3)
         allOptions.add(mOption4)
+        mOption1.background = ContextCompat.getDrawable(this, R.drawable.bg1)
+        mOption2.background = ContextCompat.getDrawable(this, R.drawable.bg2)
+        mOption3.background = ContextCompat.getDrawable(this, R.drawable.bg3)
+        mOption4.background = ContextCompat.getDrawable(this, R.drawable.bg4)
 
         for (option in allOptions) {
-            option.setTextColor(Color.parseColor("#0a0a0a"))
+            option.setTextColor(Color.parseColor("#FFFFFF"))
             option.typeface = Typeface.DEFAULT
-            option.background = ContextCompat.getDrawable(this, R.drawable.question_options_bg)
         }
     }
 
@@ -136,16 +148,19 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
                 val quest = mQuestionList[mCurrentQuestionIndex - 1]
 
                 if (quest.correct != mSelectOptionPosition) {
+                    wrong.start()
                     selectedOptionView(mSelectOptionPosition, R.drawable.wrong_option_clicked_bg)
                 } else {
+                    right.start()
                     mCorrectAnswers++
                 }
+
                 selectedOptionView(quest.correct, R.drawable.correct_option_clicked_bg)
 
                 if (mCurrentQuestionIndex == mQuestionList.size) {
                     mSubmitButton.text = "FINISH"
                 } else {
-                    mSubmitButton.text = "GO TO NEXT QUESTION"
+                    mSubmitButton.text = "NEXT"
                 }
 
                 mSelectOptionPosition = 0

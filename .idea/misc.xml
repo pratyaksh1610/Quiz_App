@@ -14,6 +14,19 @@
         <entry key="..\:/AndroidStudioProjects/QuizApp/app/src/main/res/layout/activity_questions2.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/QuizApp/app/src/main/res/layout/activity_quiz_categories.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/QuizApp/app/src/main/res/layout/activity_result.xml" value="0.4" />
+        <entry key="..\:/Users/praty/OneDrive/Desktop/Quiz_App/app/src/main/res/drawable/bg1.xml" value="0.2055" />
+        <entry key="..\:/Users/praty/OneDrive/Desktop/Quiz_App/app/src/main/res/drawable/bg2.xml" value="0.2055" />
+        <entry key="..\:/Users/praty/OneDrive/Desktop/Quiz_App/app/src/main/res/drawable/bg3.xml" value="0.2055" />
+        <entry key="..\:/Users/praty/OneDrive/Desktop/Quiz_App/app/src/main/res/drawable/bg4.xml" value="0.2055" />
+        <entry key="..\:/Users/praty/OneDrive/Desktop/Quiz_App/app/src/main/res/drawable/correct_option_clicked_bg.xml" value="0.1" />
+        <entry key="..\:/Users/praty/OneDrive/Desktop/Quiz_App/app/src/main/res/drawable/question_options_bg.xml" value="0.1735" />
+        <entry key="..\:/Users/praty/OneDrive/Desktop/Quiz_App/app/src/main/res/drawable/selected_option_clicked_bg.xml" value="0.2055" />
+        <entry key="..\:/Users/praty/OneDrive/Desktop/Quiz_App/app/src/main/res/drawable/wrong_option_clicked_bg.xml" value="0.1" />
+        <entry key="..\:/Users/praty/OneDrive/Desktop/Quiz_App/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/praty/OneDrive/Desktop/Quiz_App/app/src/main/res/layout/activity_questions2.xml" value="0.264" />
+        <entry key="..\:/Users/praty/OneDrive/Desktop/Quiz_App/app/src/main/res/layout/activity_quiz_categories.xml" value="0.2" />
+        <entry key="..\:/Users/praty/OneDrive/Desktop/Quiz_App/app/src/main/res/layout/activity_result.xml" value="0.4" />
+        <entry key="..\:/Users/praty/OneDrive/Desktop/Quiz_App/app/src/main/res/layout/each_category_view.xml" value="0.264" />
       </map>
     </option>
   </component>

@@ -22,6 +22,7 @@
         <activity
             android:name=".QuestionsActivity"
             android:exported="false"
+            android:screenOrientation="fullSensor"
             android:label="@string/title_activity_questions"
             android:theme="@style/Theme.QuizApp.NoActionBar" /> <!-- activity settings for mainActivity -->
         <!-- and set screen orientation that will not changed -->

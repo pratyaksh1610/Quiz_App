@@ -24,5 +24,4 @@ class ResultActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
 }

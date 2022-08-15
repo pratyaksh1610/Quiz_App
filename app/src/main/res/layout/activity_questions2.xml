@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#42193f"
     android:fillViewport="true"
     tools:context=".QuestionsActivity">
 
@@ -14,21 +15,19 @@
         android:orientation="vertical"
         android:padding="10dp">
 
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:src="@drawable/quiz" />
+
         <TextView
             android:id="@+id/tvQuestion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_height="150dp"
+            android:layout_margin="20dp"
             android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="28sp" />
-
-
-        <ImageView
-            android:id="@+id/image_flag"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp" />
+            android:textColor="@color/white"
+            android:textSize="25sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,9 +43,9 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:indeterminate="false"
-                android:max="9"
+                android:max="10"
                 android:minHeight="50dp"
-                android:outlineSpotShadowColor="@color/black"
+                android:outlineSpotShadowColor="@color/white"
                 android:progress="3" />
             <!--            indeterminate false so it is not in a loop-->
 
@@ -56,7 +55,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="center"
-                android:text="0/9" />
+                android:text="0/9"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
@@ -65,55 +65,75 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/question_options_bg"
+            android:background="@drawable/bg1"
             android:gravity="center"
             android:padding="10dp"
-
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/option2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/question_options_bg"
+            android:background="@drawable/bg2"
             android:gravity="center"
             android:padding="10dp"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/option3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/question_options_bg"
+            android:background="@drawable/bg3"
             android:gravity="center"
             android:padding="10dp"
-
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/option4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/question_options_bg"
-
+            android:background="@drawable/bg4"
             android:gravity="center"
             android:padding="10dp"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/submitButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="SUBMIT" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_margin="20dp"
+            app:cardBackgroundColor="#7d72ec"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="10dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/submitButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 

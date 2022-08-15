@@ -4,27 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="#42193f"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/quizAppText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/quiz_app_login_screen_text"
-        android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/cardView"
+        app:layout_constraintBottom_toTopOf="@id/brain"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/brain"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/brain"
+        app:layout_constraintBottom_toTopOf="@id/cardView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quizAppText" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp"
+        android:padding="10dp"
+        app:cardCornerRadius="30dp"
         app:cardElevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -66,22 +78,41 @@
                     android:id="@+id/enterNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/name_login_screen_text"
+                    android:hint="e.g Ron"
                     android:inputType="textCapWords"
-                    android:text="@string/name_login_screen_text"
                     android:textColor="#363A43"
-                    android:textColorHint="#7A8089" />
+                    android:textColorHint="#7A8089"
+                    android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                app:cardBackgroundColor="#7d72ec"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="10dp">
 
-            <Button
-                android:id="@+id/buttonStart"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Start" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/buttonStart"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="START"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

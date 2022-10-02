@@ -20,7 +20,7 @@ class ResultActivity : AppCompatActivity() {
         totalScore.text = "You scored $correct out of 10"
 
         btnFinish.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, QuizCategories::class.java)
             startActivity(intent)
         }
     }

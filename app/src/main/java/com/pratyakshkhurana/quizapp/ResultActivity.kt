@@ -2,10 +2,8 @@ package com.pratyakshkhurana.quizapp
 
 import android.annotation.SuppressLint
 import android.content.Intent
-
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_result.*
 
 
@@ -20,8 +18,12 @@ class ResultActivity : AppCompatActivity() {
         totalScore.text = "You scored $correct out of 10"
 
         btnFinish.setOnClickListener {
-            val intent = Intent(this, QuizCategories::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }

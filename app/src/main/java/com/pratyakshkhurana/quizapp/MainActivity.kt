@@ -27,13 +27,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (pressedTime + 2000 > System.currentTimeMillis()) {
-            super.onBackPressed();
-            finish();
-        } else {
-            Toast.makeText(baseContext, "Press back again to exit", Toast.LENGTH_SHORT).show();
-        }
-        pressedTime = System.currentTimeMillis();
+        moveTaskToBack(true);
     }
 
 }

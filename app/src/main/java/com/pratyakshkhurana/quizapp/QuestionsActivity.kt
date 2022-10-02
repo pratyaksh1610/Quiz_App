@@ -1,5 +1,6 @@
 package com.pratyakshkhurana.quizapp
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
@@ -7,6 +8,7 @@ import android.graphics.Typeface
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
+import android.view.animation.DecelerateInterpolator
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -79,7 +81,9 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
             mSubmitButton.text = "SUBMIT"
         }
 
-        mProgressbar.progress = mCurrentQuestionIndex
+        setProgressAnimate(mProgressbar,mCurrentQuestionIndex)
+//        mProgressbar.progress = mCurrentQuestionIndex
+
         mRating.text = "${mCurrentQuestionIndex}/${mQuestionList.size}"
         mQuestion.text = currentQuestion.question
         mOption1.text = currentQuestion.option1
@@ -210,6 +214,12 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
                 )
             }
         }
+    }
+    private fun setProgressAnimate(pb: ProgressBar, progressTo: Int) {
+        val animation = ObjectAnimator.ofInt(pb, "progress", pb.progress, progressTo * 10)
+        animation.duration = 500
+        animation.interpolator = DecelerateInterpolator()
+        animation.start()
     }
 }
 

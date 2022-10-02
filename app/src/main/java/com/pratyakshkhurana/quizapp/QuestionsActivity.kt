@@ -135,6 +135,10 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
                 if (mCurrentQuestionIndex <= mQuestionList.size) {
                     setQuestion()
+                    option1.isEnabled=true
+                    option2.isEnabled=true
+                    option3.isEnabled=true
+                    option4.isEnabled=true
                 } else {
                     val intent = Intent(this, ResultActivity::class.java)
                     intent.putExtra("correct", mCorrectAnswers)
@@ -150,9 +154,17 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
                 if (quest.correct != mSelectOptionPosition) {
                     wrong.start()
                     selectedOptionView(mSelectOptionPosition, R.drawable.wrong_option_clicked_bg)
+                    option1.isEnabled=false
+                    option2.isEnabled=false
+                    option3.isEnabled=false
+                    option4.isEnabled=false
                 } else {
                     right.start()
                     mCorrectAnswers++
+                    option1.isEnabled=false
+                    option2.isEnabled=false
+                    option3.isEnabled=false
+                    option4.isEnabled=false
                 }
 
                 selectedOptionView(quest.correct, R.drawable.correct_option_clicked_bg)

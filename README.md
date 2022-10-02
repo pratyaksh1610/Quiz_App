@@ -80,13 +80,6 @@ git push origin branch_name
 * :star: this repository if you liked it.
 
 
- ## 	:game_die: Shoutout to all the contributors ❤️
-
-<a href="https://github.com/pratyaksh1610/Quiz_App/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=pratyaksh1610/Quiz_App" />
-</a>
-
-
 ## License
 ```
 MIT License

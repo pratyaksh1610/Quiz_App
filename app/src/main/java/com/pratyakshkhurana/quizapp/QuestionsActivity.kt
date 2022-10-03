@@ -150,10 +150,11 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
             } else {
                 val quest = mQuestionList[mCurrentQuestionIndex - 1]
+                var wrongAns = 0
 
                 if (quest.correct != mSelectOptionPosition) {
                     wrong.start()
-                    selectedOptionView(mSelectOptionPosition, R.drawable.wrong_option_clicked_bg)
+                    wrongAns = mSelectOptionPosition
                     option1.isEnabled=false
                     option2.isEnabled=false
                     option3.isEnabled=false
@@ -167,7 +168,19 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
                     option4.isEnabled=false
                 }
 
-                selectedOptionView(quest.correct, R.drawable.correct_option_clicked_bg)
+                for (i in 1..4){
+                    when (i) {
+                        wrongAns -> {
+                            selectedOptionView(i, R.drawable.wrong_option_clicked_bg)
+                        }
+                        quest.correct -> {
+                            selectedOptionView(i, R.drawable.correct_option_clicked_bg)
+                        }
+                        else -> {
+                            selectedOptionView(i,R.drawable.other_options_not_clicked)
+                        }
+                    }
+                }
 
                 if (mCurrentQuestionIndex == mQuestionList.size) {
                     mSubmitButton.text = "FINISH"

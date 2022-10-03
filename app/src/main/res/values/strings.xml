@@ -12,4 +12,5 @@
     <string name="quiz_app_login_screen_text">Quiz App</string>
     <string name="welcome_login_screen_text">Welcome</string>
     <string name="please_enter_your_name_login_screen_text">Please enter your name.</string>
+    <string name="quiz_category_dialog">Kindly read the following rules before you proceed -\n\n"1. The quiz will contain 10 random questions.\n2. Every correct answer scores you 1 point.\n3. Every wrong answer deducts 1 point.\n4. Results are available at the end of the quiz.</string>
 </resources>

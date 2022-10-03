@@ -80,6 +80,7 @@
                     android:layout_height="wrap_content"
                     android:hint="e.g Ron"
                     android:inputType="textCapWords"
+                    android:digits="0123456789qwertzuiopasdfghjklyxcvbnm "
                     android:textColor="#363A43"
                     android:textColorHint="#7A8089"
                     android:textSize="16sp" />

@@ -18,6 +18,7 @@ class Splash_Screen : AppCompatActivity() {
                 if(sharedPreferences!!.getBoolean("isFirstTimeRun",false))
                 {
                     startActivity(Intent(applicationContext,MainActivity::class.java))
+                    finish()
                 }
                 else
                 {

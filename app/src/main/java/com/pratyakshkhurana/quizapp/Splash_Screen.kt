@@ -23,6 +23,7 @@ class Splash_Screen : AppCompatActivity() {
                 else
                 {
                     startActivity(Intent(applicationContext,OnBoardingScreen::class.java))
+                    finish()
                 }
             },1000
         )

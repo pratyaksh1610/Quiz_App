@@ -14,6 +14,20 @@
         android:theme="@style/Theme.QuizApp"
         tools:targetApi="31">
         <activity
+            android:name=".Splash_Screen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".OnBoardingScreen"
+            android:exported="false">
+
+        </activity>
+        <activity
             android:name=".QuizCategories"
             android:exported="false" />
         <activity
@@ -22,20 +36,14 @@
         <activity
             android:name=".QuestionsActivity"
             android:exported="false"
-            android:screenOrientation="fullSensor"
             android:label="@string/title_activity_questions"
+            android:screenOrientation="fullSensor"
             android:theme="@style/Theme.QuizApp.NoActionBar" /> <!-- activity settings for mainActivity -->
         <!-- and set screen orientation that will not changed -->
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:screenOrientation="fullSensor">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
     </application>
 
 </manifest>

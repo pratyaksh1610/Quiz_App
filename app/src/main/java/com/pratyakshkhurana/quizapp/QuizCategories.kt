@@ -1,9 +1,11 @@
 package com.pratyakshkhurana.quizapp
 
+import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
@@ -163,22 +165,22 @@ class QuizCategories : AppCompatActivity(), OnClicked {
 
     //Dialog for Quiz Category selection
     private fun showDialog(s: CategoryView) {
+        val dialogLayout = layoutInflater.inflate(R.layout.category_dialog, null)
         builder = AlertDialog.Builder(this)
-        builder.setTitle("Attention!!")
-        builder.setMessage(R.string.quiz_category_dialog)
-            .setCancelable(false)
-            .setPositiveButton("OK") { _: DialogInterface, _: Int ->
-                categorySelected = s.category
-                alertDialog.dismiss()
-                val intent = Intent(this, QuestionsActivity::class.java)
-                intent.putExtra("user", userName)
-                intent.putExtra("category", categorySelected)
-                startActivity(intent)
-            }
-            .setNegativeButton("CANCEL"){ _:DialogInterface, _:Int ->
-                alertDialog.dismiss()
-            }
+        dialogLayout.findViewById<View>(R.id.okButton).setOnClickListener {
+            categorySelected = s.category
+            alertDialog.dismiss()
+            val intent = Intent(this, QuestionsActivity::class.java)
+            intent.putExtra("user", userName)
+            intent.putExtra("category", categorySelected)
+            startActivity(intent)
+        }
+        dialogLayout.findViewById<View>(R.id.cancelButton).setOnClickListener {
+            alertDialog.dismiss()
+        }
+        builder.setView(dialogLayout)
         alertDialog = builder.create()
+        alertDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         alertDialog.show()
     }
 }

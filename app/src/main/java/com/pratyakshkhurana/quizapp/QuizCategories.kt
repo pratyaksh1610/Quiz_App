@@ -1,9 +1,13 @@
 package com.pratyakshkhurana.quizapp
 
+import android.app.Dialog
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_quiz_categories.*
@@ -12,6 +16,8 @@ class QuizCategories : AppCompatActivity(), OnClicked {
     private lateinit var categoryList: ArrayList<CategoryView>
     private lateinit var userName: String
     private lateinit var categorySelected: String
+    private lateinit var builder : AlertDialog.Builder
+    private lateinit var alertDialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -154,11 +160,27 @@ class QuizCategories : AppCompatActivity(), OnClicked {
 
     //through interface in adapter class
     override fun categoryClicked(s: CategoryView) {
-        Toast.makeText(this, s.category, Toast.LENGTH_SHORT).show()
-        categorySelected = s.category
-        val intent = Intent(this, QuestionsActivity::class.java)
-        intent.putExtra("user", userName)
-        intent.putExtra("category", categorySelected)
-        startActivity(intent)
+        showDialog(s)
+    }
+
+    //Dialog for Quiz Category selection
+    private fun showDialog(s: CategoryView) {
+        val dialogLayout = layoutInflater.inflate(R.layout.category_dialog, null)
+        builder = AlertDialog.Builder(this)
+        dialogLayout.findViewById<View>(R.id.okButton).setOnClickListener {
+            categorySelected = s.category
+            alertDialog.dismiss()
+            val intent = Intent(this, QuestionsActivity::class.java)
+            intent.putExtra("user", userName)
+            intent.putExtra("category", categorySelected)
+            startActivity(intent)
+        }
+        dialogLayout.findViewById<View>(R.id.cancelButton).setOnClickListener {
+            alertDialog.dismiss()
+        }
+        builder.setView(dialogLayout)
+        alertDialog = builder.create()
+        alertDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        alertDialog.show()
     }
 }

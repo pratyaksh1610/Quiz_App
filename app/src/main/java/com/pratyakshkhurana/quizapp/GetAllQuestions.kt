@@ -105,6 +105,9 @@ class GetAllQuestions {
         allQuestions.add(q9)
         allQuestions.add(q10)
 
+        //This code randomizes/shuffles the list of questions
+        allQuestions.shuffle()
+
         return allQuestions
     }
 }

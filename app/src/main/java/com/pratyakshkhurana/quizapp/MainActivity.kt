@@ -15,10 +15,8 @@ class MainActivity : AppCompatActivity() {
             if (enterNameEditText.text.toString().isEmpty()) {
                 Toast.makeText(this, "Please enter your name !", Toast.LENGTH_SHORT).show()
             } else {
+                SaveUserName()
                 val intent = Intent(this, QuizCategories::class.java)
-                //start intent by passing intent
-                //passing data to next activity
-                //passed key value pair for recognition
                 intent.putExtra("user", enterNameEditText.text.toString())
                 startActivity(intent)
             }
@@ -28,6 +26,15 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         moveTaskToBack(true);
     }
+    fun SaveUserName()
+    {
+        var sharedPreferences=getSharedPreferences("pref", MODE_PRIVATE)
+        var editor=sharedPreferences.edit()
+        editor.putString("name",enterNameEditText.text.toString())
+        editor.apply()
+
+    }
+
 
 }
 

@@ -17,8 +17,7 @@ class Splash_Screen : AppCompatActivity() {
             {
                 if(sharedPreferences!!.getBoolean("isFirstTimeRun",false))
                 {
-                    startActivity(Intent(applicationContext,MainActivity::class.java))
-                    finish()
+                    CheckUserName()
                 }
                 else
                 {
@@ -27,6 +26,21 @@ class Splash_Screen : AppCompatActivity() {
                 }
             },1000
         )
+
+    }
+    fun CheckUserName()
+    {
+        var sharedPreferences=getSharedPreferences("pref", MODE_PRIVATE)
+        var name=sharedPreferences.getString("name","")
+        if(name!="")
+        {
+            var intent=Intent(this,QuizCategories::class.java)
+            intent.putExtra("user",name)
+            startActivity(intent)
+        }else{
+            startActivity(Intent(applicationContext,MainActivity::class.java))
+            finish()
+        }
 
     }
 }

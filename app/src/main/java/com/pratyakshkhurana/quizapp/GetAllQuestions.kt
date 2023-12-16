@@ -94,6 +94,56 @@ class GetAllQuestions {
             "All of the mentioned",
             4
         )
+
+        val q11 = Questions(
+            11,
+            "What is a pointer in C++?",
+            "A type of variable",
+            "A memory address",
+            "A character symbol",
+            "A numeric value",
+            2
+        )
+
+        val q12 = Questions(
+            12,
+            "What does 'int' represent in C++?",
+            "Internal type",
+            "Interface",
+            "Integral type",
+            "Inheritance",
+            3
+        )
+
+        val q13 = Questions(
+            13,
+            "What is the output of 'cout << \"Hello World\";' in C++?",
+            "Error",
+            "Hello World",
+            "cout",
+            "0",
+            2
+        )
+
+        val q14 = Questions(
+            14,
+            "What does the 'return 0;' statement signify in a C++ program?",
+            "Error",
+            "Exit the program",
+            "No output",
+            "Return value 0",
+            4
+        )
+
+        val q15 = Questions(
+            15,
+            "What is the default return type of a function in C++?",
+            "int",
+            "void",
+            "float",
+            "double",
+            1
+        )
         allQuestions.add(q1)
         allQuestions.add(q2)
         allQuestions.add(q3)
@@ -104,6 +154,11 @@ class GetAllQuestions {
         allQuestions.add(q8)
         allQuestions.add(q9)
         allQuestions.add(q10)
+        allQuestions.add(q11)
+        allQuestions.add(q12)
+        allQuestions.add(q13)
+        allQuestions.add(q14)
+        allQuestions.add(q15)
 
         return allQuestions
     }

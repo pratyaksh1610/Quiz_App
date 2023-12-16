@@ -12,6 +12,7 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import android.os.CountDownTimer
 import kotlinx.android.synthetic.main.activity_questions2.*
 
 
@@ -23,7 +24,8 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mUsername: String
     private lateinit var category: String
     private var mCorrectAnswers: Int = 0
-
+    private lateinit var countDownTimer: CountDownTimer
+    private var timeLeft: Long = 30000
 
     private lateinit var mQuestion: TextView
     private lateinit var mProgressbar: ProgressBar
@@ -68,6 +70,8 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
         right = MediaPlayer.create(this, R.raw.right)
         wrong = MediaPlayer.create(this, R.raw.w)
 
+        mProgressbar.max = mQuestionList.size
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -89,6 +93,51 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
         mOption2.text = currentQuestion.option2
         mOption3.text = currentQuestion.option3
         mOption4.text = currentQuestion.option4
+
+        startCountdownTimer()
+    }
+
+    private fun startCountdownTimer() {
+        countDownTimer = object : CountDownTimer(timeLeft, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                timeLeft = millisUntilFinished
+                updateTimerText()
+            }
+
+            override fun onFinish() {
+                goToNextQuestion()
+            }
+        }.start()
+    }
+
+    private fun updateTimerText() {
+        // Update TextView to show the remaining time
+        val timerTextView: TextView = findViewById(R.id.timerView)
+        val secondsLeft = timeLeft / 1000
+        timerTextView.text = "Time left: $secondsLeft sec"
+    }
+
+    private fun goToNextQuestion() {
+        countDownTimer.cancel() // Stop the timer
+
+        if (mCurrentQuestionIndex <= mQuestionList.size) {
+            mCurrentQuestionIndex++
+            setQuestion() // Load the next question
+            option1.isEnabled = true
+            option2.isEnabled = true
+            option3.isEnabled = true
+            option4.isEnabled = true
+            timeLeft = 30000 // Reset timer for next question (30 seconds)
+            startCountdownTimer() // Start the timer for the new question
+        } else {
+            // Quiz is finished, navigate to the results
+            val intent = Intent(this, ResultActivity::class.java)
+            intent.putExtra("correct", mCorrectAnswers)
+            intent.putExtra("user", mUsername)
+            intent.putExtra("total", mQuestionList.size)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun resetToDefaultOptions() {
@@ -122,79 +171,74 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
     @SuppressLint("SetTextI18n")
     override fun onClick(view: View) {
-
-        if (view == mOption1) {
-            selectedOptionView(mOption1, 1)
-        } else if (view == mOption2) {
-            selectedOptionView(mOption2, 2)
-        } else if (view == mOption3) {
-            selectedOptionView(mOption3, 3)
-        } else if (view == mOption4) {
-            selectedOptionView(mOption4, 4)
-        } else if (view == mSubmitButton) {
-
-            if (mSelectOptionPosition == 0) {
-                mCurrentQuestionIndex++
-
-                if (mCurrentQuestionIndex <= mQuestionList.size) {
-                    setQuestion()
-                    option1.isEnabled=true
-                    option2.isEnabled=true
-                    option3.isEnabled=true
-                    option4.isEnabled=true
+        when (view) {
+            mOption1 -> selectedOptionView(mOption1, 1)
+            mOption2 -> selectedOptionView(mOption2, 2)
+            mOption3 -> selectedOptionView(mOption3, 3)
+            mOption4 -> selectedOptionView(mOption4, 4)
+            mSubmitButton -> {
+                if (mSelectOptionPosition == 0) {
+                    Toast.makeText(this, "Please select an option before continuing", Toast.LENGTH_SHORT).show()
                 } else {
-                    val intent = Intent(this, ResultActivity::class.java)
-                    intent.putExtra("correct", mCorrectAnswers)
-                    intent.putExtra("user", mUsername)
-                    intent.putExtra("total", 10)
-                    startActivity(intent)
-                    finish()
-                }
+                    // Option is selected
+                    val quest = mQuestionList[mCurrentQuestionIndex - 1]
+                    var wrongAns = 0
 
-            } else {
-                val quest = mQuestionList[mCurrentQuestionIndex - 1]
-                var wrongAns = 0
+                    if (quest.correct != mSelectOptionPosition) {
+                        wrong.start()
+                        wrongAns = mSelectOptionPosition
+                        option1.isEnabled = false
+                        option2.isEnabled = false
+                        option3.isEnabled = false
+                        option4.isEnabled = false
+                    } else {
+                        right.start()
+                        mCorrectAnswers++
+                        option1.isEnabled = false
+                        option2.isEnabled = false
+                        option3.isEnabled = false
+                        option4.isEnabled = false
+                    }
 
-                if (quest.correct != mSelectOptionPosition) {
-                    wrong.start()
-                    wrongAns = mSelectOptionPosition
-                    option1.isEnabled=false
-                    option2.isEnabled=false
-                    option3.isEnabled=false
-                    option4.isEnabled=false
-                } else {
-                    right.start()
-                    mCorrectAnswers++
-                    option1.isEnabled=false
-                    option2.isEnabled=false
-                    option3.isEnabled=false
-                    option4.isEnabled=false
-                }
-
-                for (i in 1..4){
-                    when (i) {
-                        wrongAns -> {
-                            selectedOptionView(i, R.drawable.wrong_option_clicked_bg)
-                        }
-                        quest.correct -> {
-                            selectedOptionView(i, R.drawable.correct_option_clicked_bg)
-                        }
-                        else -> {
-                            selectedOptionView(i,R.drawable.other_options_not_clicked)
+                    for (i in 1..4) {
+                        when (i) {
+                            wrongAns -> {
+                                selectedOptionView(i, R.drawable.wrong_option_clicked_bg)
+                            }
+                            quest.correct -> {
+                                selectedOptionView(i, R.drawable.correct_option_clicked_bg)
+                            }
+                            else -> {
+                                selectedOptionView(i, R.drawable.other_options_not_clicked)
+                            }
                         }
                     }
-                }
 
-                if (mCurrentQuestionIndex == mQuestionList.size) {
-                    mSubmitButton.text = "FINISH"
-                } else {
-                    mSubmitButton.text = "NEXT"
-                }
+                    if (mCurrentQuestionIndex == mQuestionList.size) {
+                        mSubmitButton.text = "FINISH"
+                    } else {
+                        mSubmitButton.text = "NEXT"
+                    }
 
-                mSelectOptionPosition = 0
+                    mSelectOptionPosition = 0
+                    mCurrentQuestionIndex++
+
+                    if (mCurrentQuestionIndex <= mQuestionList.size) {
+                        setQuestion()
+                        option1.isEnabled = true
+                        option2.isEnabled = true
+                        option3.isEnabled = true
+                        option4.isEnabled = true
+                    } else {
+                        val intent = Intent(this, ResultActivity::class.java)
+                        intent.putExtra("correct", mCorrectAnswers)
+                        intent.putExtra("user", mUsername)
+                        intent.putExtra("total", mQuestionList.size)
+                        startActivity(intent)
+                        finish()
+                    }
+                }
             }
-
-
         }
     }
 
@@ -228,7 +272,7 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
     private fun setProgressAnimate(pb: ProgressBar, progressTo: Int) {
-        val animation = ObjectAnimator.ofInt(pb, "progress", pb.progress, progressTo * 10)
+        val animation = ObjectAnimator.ofInt(pb, "progress", pb.progress, progressTo)
         animation.duration = 500
         animation.interpolator = DecelerateInterpolator()
         animation.start()

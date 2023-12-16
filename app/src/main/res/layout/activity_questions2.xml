@@ -15,10 +15,20 @@
         android:orientation="vertical"
         android:padding="10dp">
 
+
         <ImageView
             android:layout_width="80dp"
             android:layout_height="60dp"
             android:src="@drawable/quiz" />
+
+        <TextView
+            android:id="@+id/timerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Time left: 30 sec"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvQuestion"

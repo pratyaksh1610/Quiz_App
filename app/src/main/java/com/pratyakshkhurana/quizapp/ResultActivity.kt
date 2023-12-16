@@ -15,7 +15,8 @@ class ResultActivity : AppCompatActivity() {
 
         name.text = intent.getStringExtra("user")
         val correct = intent.getIntExtra("correct", 0)
-        totalScore.text = "You scored $correct out of 10"
+        val total = intent.getIntExtra("total", 10)
+        totalScore.text = "You scored $correct out of $total"
 
         btnFinish.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

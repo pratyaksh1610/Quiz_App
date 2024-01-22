@@ -11,7 +11,7 @@
 </p>
 
 
-# :gift: Hacktoberfest 2022
+# :gift: Hacktoberfest 2024
 #### :dart: Let's celebrate Hacktoberfest by getting involved in the open source community and start your journey in open source.
 #### :dart: This repository is open to all the members of the GitHub community. Feel free to contribute to this repository.<br>
 
